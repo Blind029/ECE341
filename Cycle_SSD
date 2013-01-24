@@ -65,5 +65,5 @@ void loop()
       digitalWrite(ledPin4, ledState[4]);
       digitalWrite(ledPin5, ledState[5]);
       digitalWrite(ledPin6, ledState[6]);
-  }
+  }//
 }
