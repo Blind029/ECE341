@@ -1,0 +1,74 @@
+//initialize the lights to external pins
+const int R1 = 8;//Segment F, Red light 1
+const int Y1 = 13;//A, Yellow light 1
+const int G1 = 12;//B, Green light 1
+const int R2 = 9;//E, Red light 2
+const int Y2 = 7;//G, Yellow light 2
+const int G2 = 11;//C, Green light 2
+
+//initialize the possible states
+int ledState[6] = {HIGH,LOW,LOW,LOW,LOW,HIGH};//start with light 1 red, light 2 green
+const int ledState1[6] = {HIGH,LOW,LOW,LOW,LOW,HIGH};//four possible states
+const int ledState2[6] = {HIGH,LOW,LOW,LOW,HIGH,LOW};
+const int ledState3[6] = {LOW,LOW,HIGH,HIGH,LOW,LOW};
+const int ledState4[6] = {LOW,HIGH,LOW,HIGH,LOW,LOW};
+long previousMillis = 0;
+int truth=0;
+
+//set interval for light change
+long interval = 2000;
+
+void setup()
+{
+//set each pin to output
+  pinMode(R1, OUTPUT);
+  pinMode(Y1, OUTPUT);
+  pinMode(G1, OUTPUT);
+  pinMode(R2, OUTPUT);
+  pinMode(Y2, OUTPUT);
+  pinMode(G2, OUTPUT);
+}
+
+void loop()
+{
+  //start timer for currentMillis
+  unsigned long currentMillis = millis();
+  
+  if (currentMillis - previousMillis > interval)
+  {
+    //save the time of last change
+    previousMillis=currentMillis;
+    if (truth==0)
+    {
+      truth=1;
+      ledState={HIGH,LOW,LOW,LOW,HIGH,LOW};
+      interval=1000;
+    } 
+    else if (truth==1)
+    {
+      truth=2;
+      ledState={LOW,LOW,HIGH,HIGH,LOW,LOW};
+      interval=7000;
+    }
+    else if (truth==2)
+    {  
+      truth=3;
+      ledState={LOW,HIGH,LOW,HIGH,LOW,LOW};
+      interval=1000;
+    }
+    else
+    {
+      truth=0;
+      ledState={HIGH,LOW,LOW,LOW,LOW,HIGH};
+      interval=7000;
+    }
+    //output to each pin
+    digitalWrite(R1, ledState[0]);
+    digitalWrite(Y1, ledState[1]);
+    digitalWrite(G1, ledState[2]);
+    digitalWrite(R2, ledState[3]);
+    digitalWrite(Y2, ledState[4]);
+    digitalWrite(G2, ledState[5]);
+  }
+}
+       
