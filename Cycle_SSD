@@ -1,0 +1,69 @@
+const int ledPin0 =  13;// LED pins in an array for SSD
+const int ledPin1 =  12;
+const int ledPin2 =  11;
+const int ledPin3 =  10;
+const int ledPin4 =  9;
+const int ledPin5 =  8;
+const int ledPin6 =  7;
+
+// Variables will change:
+int ledState[7] = {LOW,LOW,LOW,LOW,LOW,LOW,LOW};// ledState used to set the initial LED
+long previousMillis = 0;        // will store last time LED was updated
+
+// the follow variables is a long because the time, measured in miliseconds,
+// will quickly become a bigger number than can be stored in an int.
+long interval = 5;           // interval at which to blink (milliseconds)
+
+void setup() {
+  // set the digital pin as output:
+  pinMode(ledPin0, OUTPUT);
+  pinMode(ledPin1, OUTPUT);
+  pinMode(ledPin2, OUTPUT);
+  pinMode(ledPin3, OUTPUT);
+  pinMode(ledPin4, OUTPUT);
+  pinMode(ledPin5, OUTPUT);
+  pinMode(ledPin6, OUTPUT);
+}
+
+void loop()
+{
+  // here is where you'd put code that needs to be running all the time.
+
+  // check to see if it's time to blink the LED; that is, if the 
+  // difference between the current time and last time you blinked 
+  // the LED is bigger than the interval at which you want to 
+  // blink the LED.
+  unsigned long currentMillis = millis();
+    
+  if(currentMillis - previousMillis > interval) 
+  {
+    // save the last time you blinked the LED 
+    previousMillis = currentMillis;   
+    // if the LED is off turn it on and vice-versa:
+    //1.  Read current state
+    //2.  Output next state
+    if (ledState[0]==HIGH)
+  ledState={LOW,HIGH,LOW,LOW,LOW,LOW,LOW};
+    else if (ledState[1]==HIGH)
+	ledState={LOW,LOW,HIGH,LOW,LOW,LOW,LOW};
+    else if (ledState[2]==HIGH)
+	ledState={LOW,LOW,LOW,HIGH,LOW,LOW,LOW};
+    else if (ledState[3]==HIGH)
+	ledState={LOW,LOW,LOW,LOW,HIGH,LOW,LOW};
+    else if (ledState[4]==HIGH)
+	ledState={LOW,LOW,LOW,LOW,LOW,HIGH,LOW};
+    else if (ledState[5]==HIGH)
+	ledState={LOW,LOW,LOW,LOW,LOW,LOW,HIGH};
+    else
+	ledState={HIGH,LOW,LOW,LOW,LOW,LOW,LOW};
+    // set the LED with the ledState of the variable:
+    //for (int i=0;i<7;i++)
+      digitalWrite(ledPin0, ledState[0]);
+      digitalWrite(ledPin1, ledState[1]);
+      digitalWrite(ledPin2, ledState[2]);
+      digitalWrite(ledPin3, ledState[3]);
+      digitalWrite(ledPin4, ledState[4]);
+      digitalWrite(ledPin5, ledState[5]);
+      digitalWrite(ledPin6, ledState[6]);
+  }
+}
